@@ -1,0 +1,184 @@
+[gd_scene load_steps=19 format=3 uid="uid://dsxt6m27hihoo"]
+
+[ext_resource type="Script" uid="uid://c4v5job4ip8an" path="res://scripts/battle_template.gd" id="1_aa2me"]
+[ext_resource type="Script" uid="uid://dt2nn8ihs8vmc" path="res://battle/battle_vars.gd" id="2_2lrfi"]
+[ext_resource type="PackedScene" uid="uid://bcg8rlye3pbe5" path="res://battle/player_sm/player_sm.tscn" id="2_4xpe1"]
+[ext_resource type="Script" uid="uid://bd8sy543wtfwo" path="res://scripts/cam.gd" id="2_la7i5"]
+[ext_resource type="PackedScene" uid="uid://cbkluoqn1mgwp" path="res://battle/heart.tscn" id="3_4xpe1"]
+[ext_resource type="PackedScene" uid="uid://vb0dvld8t3uf" path="res://battle/buttons/buttons_handler.tscn" id="4_ajehn"]
+[ext_resource type="Script" uid="uid://cn5ulagthx7xk" path="res://scripts/bullet_handler.gd" id="4_ct7nr"]
+[ext_resource type="Script" uid="uid://e80w4pavv27" path="res://battle/enemy_handler.gd" id="4_kpn0w"]
+[ext_resource type="PackedScene" uid="uid://dm3c12blknfcv" path="res://battle/enemies/enemy.tscn" id="5_2lrfi"]
+[ext_resource type="PackedScene" uid="uid://dceaen04n1p3r" path="res://battle/hud.tscn" id="5_3asw0"]
+[ext_resource type="Script" uid="uid://3u6d2x5htjv7" path="res://battle/buttons/fight.gd" id="6_2k4h2"]
+[ext_resource type="PackedScene" uid="uid://c8r8yta26xeqe" path="res://battle/box.tscn" id="6_ct7nr"]
+[ext_resource type="Script" uid="uid://cvhhpde3r7sbc" path="res://battle/buttons/act.gd" id="7_btl4p"]
+[ext_resource type="Script" uid="uid://c51wtvj6awg86" path="res://battle/buttons/item.gd" id="8_kpn0w"]
+[ext_resource type="Script" uid="uid://d0q5fbuifyfwk" path="res://battle/buttons/mercy.gd" id="9_2lrfi"]
+[ext_resource type="Script" uid="uid://by4iry1fn6arw" path="res://battle/battle_writer.gd" id="10_2k4h2"]
+[ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="10_kpn0w"]
+
+[sub_resource type="GDScript" id="GDScript_njuxi"]
+script/source = "extends Control
+
+@export var box : HUDBattleBox
+
+func _process(_delta: float) -> void:
+	global_position = box.global_position
+	size = box.size
+	rotation_degrees = box.rotation_degrees
+"
+
+[node name="battle_template" type="Node2D"]
+script = ExtResource("1_aa2me")
+
+[node name="cam" type="Camera2D" parent="."]
+position = Vector2(320, 240)
+script = ExtResource("2_la7i5")
+
+[node name="battle_vars" type="Node" parent="."]
+script = ExtResource("2_2lrfi")
+healing_attack = true
+kr = true
+
+[node name="bullet_handler" type="Node" parent="." node_paths=PackedStringArray("box", "mask")]
+script = ExtResource("4_ct7nr")
+box = NodePath("../box")
+mask = NodePath("../bullet_mask")
+
+[node name="player_sm" parent="." node_paths=PackedStringArray("battle_vars", "initial_state") instance=ExtResource("2_4xpe1")]
+battle_vars = NodePath("../battle_vars")
+initial_state = NodePath("in_buttons")
+
+[node name="dodging" parent="player_sm" index="0" node_paths=PackedStringArray("heart")]
+heart = NodePath("../../heart")
+
+[node name="acting" parent="player_sm" index="1" node_paths=PackedStringArray("battle_vars", "heart", "battle_writer")]
+battle_vars = NodePath("../../battle_vars")
+heart = NodePath("../../heart")
+battle_writer = NodePath("../../writer")
+
+[node name="in_buttons" parent="player_sm" index="2" node_paths=PackedStringArray("battle_vars", "heart", "box", "buttons", "writer")]
+battle_vars = NodePath("../../battle_vars")
+heart = NodePath("../../heart")
+box = NodePath("../../box")
+buttons = [NodePath("../../buttons_handler/fight"), NodePath("../../buttons_handler/act"), NodePath("../../buttons_handler/item"), NodePath("../../buttons_handler/mercy")]
+writer = NodePath("../../writer")
+
+[node name="in_fightbutton" parent="player_sm" index="3" node_paths=PackedStringArray("heart", "enemy_handler")]
+heart = NodePath("../../heart")
+enemy_handler = NodePath("../../enemy_handler")
+
+[node name="in_actbutton" parent="player_sm" index="4" node_paths=PackedStringArray("heart", "enemy_handler")]
+heart = NodePath("../../heart")
+enemy_handler = NodePath("../../enemy_handler")
+
+[node name="in_itemsbutton" parent="player_sm" index="5" node_paths=PackedStringArray("heart", "battle_vars")]
+heart = NodePath("../../heart")
+battle_vars = NodePath("../../battle_vars")
+
+[node name="item_use" parent="player_sm" index="6" node_paths=PackedStringArray("battle_vars", "battle_writer", "heart")]
+battle_vars = NodePath("../../battle_vars")
+battle_writer = NodePath("../../writer")
+heart = NodePath("../../heart")
+
+[node name="in_attack_eye" parent="player_sm" index="7" node_paths=PackedStringArray("battle_vars", "eye_handler", "enemy_handler")]
+battle_vars = NodePath("../../battle_vars")
+eye_handler = NodePath("eye_handler")
+enemy_handler = NodePath("../../enemy_handler")
+
+[node name="act_options" parent="player_sm" index="8" node_paths=PackedStringArray("battle_vars", "heart", "writer")]
+battle_vars = NodePath("../../battle_vars")
+heart = NodePath("../../heart")
+writer = NodePath("../../writer")
+
+[node name="pre_attack" parent="player_sm" index="9" node_paths=PackedStringArray("heart", "box", "enemy_handler")]
+heart = NodePath("../../heart")
+box = NodePath("../../box")
+enemy_handler = NodePath("../../enemy_handler")
+
+[node name="pre_healing_attack" parent="player_sm" index="10" node_paths=PackedStringArray("heart", "box", "enemy_handler")]
+heart = NodePath("../../heart")
+box = NodePath("../../box")
+enemy_handler = NodePath("../../enemy_handler")
+
+[node name="hud" parent="." node_paths=PackedStringArray("battle_vars") instance=ExtResource("5_3asw0")]
+battle_vars = NodePath("../battle_vars")
+
+[node name="enemy_handler" type="Node" parent="." node_paths=PackedStringArray("battle_vars", "battle_writer")]
+script = ExtResource("4_kpn0w")
+battle_vars = NodePath("../battle_vars")
+battle_writer = NodePath("../writer")
+
+[node name="enemy" parent="enemy_handler" instance=ExtResource("5_2lrfi")]
+position = Vector2(321, 150)
+
+[node name="enemy2" parent="enemy_handler" instance=ExtResource("5_2lrfi")]
+position = Vector2(321, 150)
+max_hp = 10
+hp = 10
+
+[node name="buttons_handler" parent="." instance=ExtResource("4_ajehn")]
+
+[node name="fight" parent="buttons_handler" index="0"]
+script = ExtResource("6_2k4h2")
+
+[node name="outline" parent="buttons_handler/fight" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="act" parent="buttons_handler" index="1"]
+script = ExtResource("7_btl4p")
+
+[node name="outline" parent="buttons_handler/act" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="item" parent="buttons_handler" index="2"]
+script = ExtResource("8_kpn0w")
+
+[node name="outline" parent="buttons_handler/item" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="mercy" parent="buttons_handler" index="3"]
+script = ExtResource("9_2lrfi")
+
+[node name="outline" parent="buttons_handler/mercy" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="writer" type="RichTextLabel" parent="."]
+offset_left = 53.0
+offset_top = 269.0
+offset_right = 609.0
+offset_bottom = 390.0
+theme_override_fonts/normal_font = ExtResource("10_kpn0w")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "* You feel like you're going to 
+  have a bad time."
+scroll_active = false
+script = ExtResource("10_2k4h2")
+metadata/_edit_use_anchors_ = true
+
+[node name="box" parent="." instance=ExtResource("6_ct7nr")]
+metadata/_edit_use_anchors_ = true
+
+[node name="bullet_mask" type="Control" parent="." node_paths=PackedStringArray("box")]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("GDScript_njuxi")
+box = NodePath("../box")
+metadata/_edit_use_anchors_ = true
+
+[node name="heart" parent="." node_paths=PackedStringArray("hitbox", "camera", "battle_vars") instance=ExtResource("3_4xpe1")]
+z_index = 1
+position = Vector2(320, 320)
+hitbox = NodePath("hitbox")
+camera = NodePath("../cam")
+battle_vars = NodePath("../battle_vars")
+shake_on_hit = true
+
+[editable path="player_sm"]
+[editable path="buttons_handler"]
+[editable path="heart"]

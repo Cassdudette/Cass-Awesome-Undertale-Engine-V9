@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbkluoqn1mgwp"]
+
+[ext_resource type="Texture2D" uid="uid://dq5murjbjcedu" path="res://assets/sprites/battle/heart0.png" id="1_mwn7d"]
+
+[sub_resource type="GDScript" id="GDScript_njuxi"]
+script/source = "extends PlayerHeart
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rf26a"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mwn7d"]
+size = Vector2(8, 8)
+
+[node name="heart" type="CharacterBody2D"]
+script = SubResource("GDScript_njuxi")
+
+[node name="sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("1_mwn7d")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rf26a")
+
+[node name="hitbox" type="Area2D" parent="." groups=["player_hitbox"]]
+
+[node name="collision" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("RectangleShape2D_mwn7d")
+debug_color = Color(0.9784439, 0, 0.3999081, 0.41960785)

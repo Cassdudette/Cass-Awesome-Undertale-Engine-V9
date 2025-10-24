@@ -1,0 +1,146 @@
+[gd_scene load_steps=15 format=3 uid="uid://vb0dvld8t3uf"]
+
+[ext_resource type="Script" uid="uid://be3u337ulkukf" path="res://battle/buttons/buttons_handler.gd" id="1_2cv42"]
+[ext_resource type="Texture2D" uid="uid://bm4s5dkyqa54p" path="res://assets/sprites/battle/buttons/fight1.png" id="2_6c8y3"]
+[ext_resource type="Texture2D" uid="uid://bncx6ub4uli6w" path="res://assets/sprites/battle/buttons/fight0.png" id="3_b8j6b"]
+[ext_resource type="Texture2D" uid="uid://bq1672ho1l704" path="res://assets/sprites/battle/buttons/act1.png" id="4_fvjo0"]
+[ext_resource type="Texture2D" uid="uid://3rn8gv6c7s5o" path="res://assets/sprites/battle/buttons/act0.png" id="5_c0b4y"]
+[ext_resource type="Texture2D" uid="uid://bar0uu580wyrd" path="res://assets/sprites/battle/buttons/item0.png" id="6_j33d4"]
+[ext_resource type="Texture2D" uid="uid://coho526trc6lw" path="res://assets/sprites/battle/buttons/item1.png" id="7_unjmk"]
+[ext_resource type="Texture2D" uid="uid://cs7tdspb22rq3" path="res://assets/sprites/battle/buttons/mercy1.png" id="8_1wiv7"]
+[ext_resource type="Texture2D" uid="uid://dfavfvsp2ns2u" path="res://assets/sprites/battle/buttons/mercy0.png" id="9_londb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fhdl0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6c8y3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_b8j6b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cg3rf"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fpdq3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_fvjo0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_c0b4y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1uts7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_j33d4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_unjmk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ykd88"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_1wiv7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_londb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="buttons" type="Node"]
+script = ExtResource("1_2cv42")
+
+[node name="fight" type="AnimatedSprite2D" parent="."]
+position = Vector2(88, 452)
+sprite_frames = SubResource("SpriteFrames_fhdl0")
+frame = 1
+
+[node name="outline" type="Panel" parent="fight"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -21.0
+offset_right = -55.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cg3rf")
+
+[node name="act" type="AnimatedSprite2D" parent="."]
+position = Vector2(241, 452)
+sprite_frames = SubResource("SpriteFrames_fpdq3")
+
+[node name="outline" type="Panel" parent="act"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -21.0
+offset_right = -55.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cg3rf")
+
+[node name="item" type="AnimatedSprite2D" parent="."]
+position = Vector2(401, 452)
+sprite_frames = SubResource("SpriteFrames_1uts7")
+
+[node name="outline" type="Panel" parent="item"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -21.0
+offset_right = -55.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cg3rf")
+
+[node name="mercy" type="AnimatedSprite2D" parent="."]
+position = Vector2(556, 452)
+sprite_frames = SubResource("SpriteFrames_ykd88")
+
+[node name="outline" type="Panel" parent="mercy"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -21.0
+offset_right = -55.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cg3rf")

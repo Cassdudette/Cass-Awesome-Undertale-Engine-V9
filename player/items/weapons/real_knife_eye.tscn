@@ -1,0 +1,76 @@
+[gd_scene load_steps=14 format=3 uid="uid://bc73jfxtvulis"]
+
+[ext_resource type="Texture2D" uid="uid://dh2f4qlyr5jxt" path="res://assets/sprites/battle/attack_bar.png" id="1_5kpry"]
+[ext_resource type="Script" uid="uid://dkrgwm6ed50qn" path="res://player/items/weapons/real_knife_eye.gd" id="2_0nwq6"]
+[ext_resource type="Texture2D" uid="uid://biyansumxfuy7" path="res://assets/sprites/battle/hit_bar/0.png" id="3_x4lhl"]
+[ext_resource type="Texture2D" uid="uid://rni0ixpu72gk" path="res://assets/sprites/battle/hit_bar/1.png" id="4_qicsq"]
+[ext_resource type="Texture2D" uid="uid://mfo4i33u5oo7" path="res://assets/sprites/battle/slash/0.png" id="5_ewhfy"]
+[ext_resource type="Texture2D" uid="uid://kmfj3g0w60st" path="res://assets/sprites/battle/slash/1.png" id="6_gd2r3"]
+[ext_resource type="Texture2D" uid="uid://ycdcyu7qcoix" path="res://assets/sprites/battle/slash/2.png" id="7_xqd27"]
+[ext_resource type="Texture2D" uid="uid://blul6udrho1yg" path="res://assets/sprites/battle/slash/3.png" id="8_87odi"]
+[ext_resource type="Texture2D" uid="uid://rmhduuclbu64" path="res://assets/sprites/battle/slash/4.png" id="9_86o15"]
+[ext_resource type="Texture2D" uid="uid://cq3jwyffqw6mu" path="res://assets/sprites/battle/slash/5.png" id="10_lbice"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nwq6"]
+atlas = ExtResource("1_5kpry")
+region = Rect2(20, 20, 1020, 230)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_61vji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_x4lhl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qicsq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l0kjw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ewhfy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gd2r3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xqd27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_87odi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_86o15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lbice")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="real_knife_eye" type="TextureRect"]
+top_level = true
+offset_left = -274.0
+offset_top = -58.0
+offset_right = 271.0
+offset_bottom = 57.0
+pivot_offset = Vector2(274, 58)
+texture = SubResource("AtlasTexture_0nwq6")
+expand_mode = 1
+script = ExtResource("2_0nwq6")
+
+[node name="hit_bar" type="AnimatedSprite2D" parent="."]
+visible = false
+top_level = true
+sprite_frames = SubResource("SpriteFrames_61vji")
+
+[node name="slash" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_l0kjw")

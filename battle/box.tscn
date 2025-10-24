@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8r8yta26xeqe"]
+
+[ext_resource type="Script" uid="uid://bjrbp4elf5teg" path="res://battle/box.gd" id="1_jphtd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xpe1"]
+bg_color = Color(0, 0, 0, 1)
+draw_center = false
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajehn"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xpe1"]
+size = Vector2(6, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ajehn"]
+size = Vector2(576, 6)
+
+[node name="box" type="Panel"]
+offset_left = 33.0
+offset_top = 250.0
+offset_right = 609.0
+offset_bottom = 390.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xpe1")
+script = ExtResource("1_jphtd")
+
+[node name="background" type="Panel" parent="."]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ajehn")
+
+[node name="body" type="StaticBody2D" parent="."]
+
+[node name="left_wall" type="CollisionShape2D" parent="body"]
+position = Vector2(3, 70)
+shape = SubResource("RectangleShape2D_4xpe1")
+
+[node name="right_wall" type="CollisionShape2D" parent="body"]
+position = Vector2(573, 70)
+shape = SubResource("RectangleShape2D_4xpe1")
+
+[node name="top_wall" type="CollisionShape2D" parent="body"]
+position = Vector2(288, 3)
+shape = SubResource("RectangleShape2D_ajehn")
+
+[node name="bottom_wall" type="CollisionShape2D" parent="body"]
+position = Vector2(288, 137)
+shape = SubResource("RectangleShape2D_ajehn")

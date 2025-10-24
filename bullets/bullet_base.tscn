@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgh2ie8tv30tn"]
+
+[ext_resource type="Script" uid="uid://lk2erf28kueq" path="res://bullets/bullet_base.gd" id="1_j7btn"]
+
+[node name="bullet_base" type="Node2D" node_paths=PackedStringArray("hitbox") groups=["bullets"]]
+script = ExtResource("1_j7btn")
+damage = 1
+kr = 1
+hitbox = NodePath("hitbox")
+
+[node name="hitbox" type="Area2D" parent="."]

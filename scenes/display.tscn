@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://drfcxjaonkyj8"]
+
+[ext_resource type="Script" uid="uid://br0p58i4kce73" path="res://scripts/display.gd" id="1_wijb7"]
+[ext_resource type="PackedScene" uid="uid://dsxt6m27hihoo" path="res://scenes/battle_template.tscn" id="2_52sky"]
+[ext_resource type="Texture2D" uid="uid://cl6ade1h6i81d" path="res://assets/sprites/border1.png" id="2_wy1qo"]
+[ext_resource type="Shader" uid="uid://bw1eqiidpke3o" path="res://shaders/blur.gdshader" id="3_52sky"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mwlbc"]
+render_priority = 0
+shader = ExtResource("3_52sky")
+
+[node name="display" type="Node2D" node_paths=PackedStringArray("game_socket")]
+script = ExtResource("1_wijb7")
+default_scene = ExtResource("2_52sky")
+game_socket = NodePath("game_socket")
+
+[node name="game_socket" type="Node2D" parent="."]
+
+[node name="border_layer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="border" type="Sprite2D" parent="border_layer"]
+material = SubResource("ShaderMaterial_mwlbc")
+position = Vector2(480, 270)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_wy1qo")
+region_enabled = true
+region_rect = Rect2(0, 1, 1920, 1080)
+metadata/_edit_lock_ = true
+
+[node name="camera_2d" type="Camera2D" parent="."]
+position = Vector2(320, 240)
+enabled = false

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm8u8tjof8pcr"]
+
+[ext_resource type="PackedScene" uid="uid://bgh2ie8tv30tn" path="res://bullets/bullet_base.tscn" id="1_qcp16"]
+[ext_resource type="Texture2D" uid="uid://c8expqpm4te7g" path="res://bullets/sans/bone_sans.png" id="2_46ybc"]
+[ext_resource type="Script" uid="uid://bybhxnuvuksru" path="res://bullets/sans/sans_bone.gd" id="2_jp5vk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jp5vk"]
+size = Vector2(4, 18)
+
+[node name="bullet_base" instance=ExtResource("1_qcp16")]
+script = ExtResource("2_jp5vk")
+damage = 20
+
+[node name="bone_sans" type="NinePatchRect" parent="." index="0"]
+offset_left = -6.0
+offset_top = -13.0
+offset_right = 6.0
+offset_bottom = 13.0
+texture = ExtResource("2_46ybc")
+patch_margin_top = 6
+patch_margin_bottom = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="collision" type="CollisionShape2D" parent="hitbox" index="0"]
+shape = SubResource("RectangleShape2D_jp5vk")

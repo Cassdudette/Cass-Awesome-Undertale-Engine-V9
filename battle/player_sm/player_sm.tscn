@@ -1,0 +1,76 @@
+[gd_scene load_steps=14 format=3 uid="uid://bcg8rlye3pbe5"]
+
+[ext_resource type="Script" uid="uid://cqfttnjxwwl4" path="res://battle/player_sm/player_sm.tres.gd" id="1_xn1er"]
+[ext_resource type="Script" uid="uid://c8yi2ooo43ukj" path="res://battle/player_sm/dodging.gd" id="1_y4ydv"]
+[ext_resource type="Script" uid="uid://cqksro4qif1t" path="res://battle/player_sm/in_buttons.gd" id="2_niba7"]
+[ext_resource type="Script" uid="uid://cntg3cvw3o6vn" path="res://battle/player_sm/acting.gd" id="3_jhiic"]
+[ext_resource type="Script" uid="uid://bs7uoxwh5ptnc" path="res://battle/player_sm/in_fightbutton.gd" id="3_xn1er"]
+[ext_resource type="Script" uid="uid://dsy3hi31702tn" path="res://battle/player_sm/item_use.gd" id="4_cuuyg"]
+[ext_resource type="Script" uid="uid://canasrvxls6kh" path="res://battle/player_sm/in_attack_eye.gd" id="5_kvc6a"]
+[ext_resource type="Script" uid="uid://y6bfljqa3vcd" path="res://battle/player_sm/in_act_button.gd" id="5_lpdlq"]
+[ext_resource type="Script" uid="uid://cujahbschgabr" path="res://battle/player_sm/pre_attack.gd" id="6_kvc6a"]
+[ext_resource type="Script" uid="uid://dcmap6023ckpa" path="res://battle/player_sm/in_itemsbutton.gd" id="7_16iuj"]
+[ext_resource type="Script" uid="uid://hkyxa7oeppdm" path="res://battle/player_sm/act_options.gd" id="7_kxfmv"]
+[ext_resource type="Script" uid="uid://bntnoe7ctat17" path="res://battle/player_sm/pre_healing_attack.gd" id="9_gxao5"]
+
+[sub_resource type="GDScript" id="GDScript_kvc6a"]
+script/source = "extends EyeHandler
+"
+
+[node name="player_sm" type="Node" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_xn1er")
+initial_state = NodePath("dodging")
+
+[node name="dodging" type="Node" parent="."]
+script = ExtResource("1_y4ydv")
+
+[node name="acting" type="Node" parent="."]
+script = ExtResource("3_jhiic")
+metadata/_custom_type_script = "uid://cqvmmq5ag8nb5"
+
+[node name="in_buttons" type="Node" parent="."]
+script = ExtResource("2_niba7")
+metadata/_custom_type_script = "uid://cqvmmq5ag8nb5"
+
+[node name="in_fightbutton" type="Node" parent="."]
+script = ExtResource("3_xn1er")
+metadata/_custom_type_script = "uid://cqvmmq5ag8nb5"
+
+[node name="label_handler" type="Node" parent="in_fightbutton"]
+
+[node name="in_actbutton" type="Node" parent="."]
+script = ExtResource("5_lpdlq")
+metadata/_custom_type_script = "uid://cqvmmq5ag8nb5"
+
+[node name="label_handler" type="Node" parent="in_actbutton"]
+
+[node name="in_itemsbutton" type="Node" parent="." node_paths=PackedStringArray("label_handler")]
+script = ExtResource("7_16iuj")
+label_handler = NodePath("label_handler")
+metadata/_custom_type_script = "uid://cqvmmq5ag8nb5"
+
+[node name="label_handler" type="Node" parent="in_itemsbutton"]
+
+[node name="item_use" type="Node" parent="."]
+script = ExtResource("4_cuuyg")
+metadata/_custom_type_script = "uid://cqvmmq5ag8nb5"
+
+[node name="in_attack_eye" type="Node" parent="."]
+script = ExtResource("5_kvc6a")
+metadata/_custom_type_script = "uid://cqvmmq5ag8nb5"
+
+[node name="eye_handler" type="Node" parent="in_attack_eye"]
+script = SubResource("GDScript_kvc6a")
+
+[node name="act_options" type="Node" parent="." node_paths=PackedStringArray("label_handler")]
+script = ExtResource("7_kxfmv")
+label_handler = NodePath("../in_actbutton/label_handler")
+metadata/_custom_type_script = "uid://cqvmmq5ag8nb5"
+
+[node name="pre_attack" type="Node" parent="."]
+script = ExtResource("6_kvc6a")
+metadata/_custom_type_script = "uid://cqvmmq5ag8nb5"
+
+[node name="pre_healing_attack" type="Node" parent="."]
+script = ExtResource("9_gxao5")
+metadata/_custom_type_script = "uid://cqvmmq5ag8nb5"

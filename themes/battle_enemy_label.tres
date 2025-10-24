@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bdvb4bby3a14m"]
+
+[ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="1_wdij1"]
+
+[resource]
+font = ExtResource("1_wdij1")
+font_size = 32
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)

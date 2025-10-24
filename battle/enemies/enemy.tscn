@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://dm3c12blknfcv"]
+
+[ext_resource type="Script" uid="uid://b3olsehidjtvs" path="res://scripts/test_enemy.gd" id="1_wktrk"]
+[ext_resource type="FontFile" uid="uid://cp6sddxxon0o0" path="res://assets/fonts/damage.ttf" id="2_rapef"]
+[ext_resource type="Texture2D" uid="uid://cf8bcesul1iv5" path="res://assets/sprites/battle/speech_bubble.png" id="3_cenwh"]
+[ext_resource type="Script" uid="uid://c7shffr2g6l4g" path="res://battle/enemy_writer.gd" id="4_0ydd5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_syduy"]
+font = ExtResource("2_rapef")
+font_size = 28
+font_color = Color(0.6955032, 0.6955031, 0.6955031, 1)
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cenwh"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ydd5"]
+bg_color = Color(1, 1, 0, 1)
+
+[node name="enemy" type="Node2D" node_paths=PackedStringArray("hit_marker")]
+script = ExtResource("1_wktrk")
+hit_marker = NodePath("hit_marker")
+
+[node name="hit_marker" type="Marker2D" parent="."]
+gizmo_extents = 50.0
+
+[node name="damage_label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+offset_left = -55.0
+offset_top = -124.0
+offset_right = 65.0
+offset_bottom = -72.0
+text = "MISS"
+label_settings = SubResource("LabelSettings_syduy")
+horizontal_alignment = 1
+
+[node name="hp_bar" type="ProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -55.0
+offset_top = -81.0
+offset_right = 56.0
+offset_bottom = -64.0
+theme_override_styles/background = SubResource("StyleBoxFlat_cenwh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0ydd5")
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="speech_bubble" type="NinePatchRect" parent="."]
+visible = false
+offset_left = 9.0
+offset_top = -48.0
+offset_right = 181.0
+offset_bottom = 41.0
+texture = ExtResource("3_cenwh")
+region_rect = Rect2(0, 0, 105, 97)
+patch_margin_left = 44
+patch_margin_top = 61
+patch_margin_right = 38
+patch_margin_bottom = 28
+
+[node name="writer" type="RichTextLabel" parent="speech_bubble"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 4.0
+offset_right = 159.0
+offset_bottom = 153.0
+script = ExtResource("4_0ydd5")
+metadata/_custom_type_script = "uid://vxwmojtmkvwd"

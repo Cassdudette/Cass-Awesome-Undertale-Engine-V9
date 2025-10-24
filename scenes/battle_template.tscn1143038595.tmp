@@ -1,0 +1,63 @@
+[gd_scene load_steps=13 format=3 uid="uid://dsxt6m27hihoo"]
+
+[ext_resource type="Script" uid="uid://c4v5job4ip8an" path="res://scripts/battle_template.gd" id="1_aa2me"]
+[ext_resource type="PackedScene" uid="uid://bcg8rlye3pbe5" path="res://battle/player_sm/player_sm.tscn" id="2_4xpe1"]
+[ext_resource type="PackedScene" uid="uid://cbkluoqn1mgwp" path="res://battle/heart.tscn" id="3_4xpe1"]
+[ext_resource type="Script" uid="uid://cqksro4qif1t" path="res://battle/player_sm/in_buttons.gd" id="3_agrq4"]
+[ext_resource type="PackedScene" uid="uid://vb0dvld8t3uf" path="res://battle/buttons/buttons_handler.tscn" id="4_ajehn"]
+[ext_resource type="PackedScene" uid="uid://dceaen04n1p3r" path="res://battle/hud.tscn" id="5_3asw0"]
+[ext_resource type="Script" uid="uid://3u6d2x5htjv7" path="res://battle/buttons/fight.gd" id="6_2k4h2"]
+[ext_resource type="PackedScene" uid="uid://c8r8yta26xeqe" path="res://battle/box.tscn" id="6_ct7nr"]
+[ext_resource type="Script" uid="uid://cvhhpde3r7sbc" path="res://battle/buttons/act.gd" id="7_btl4p"]
+[ext_resource type="Script" uid="uid://c51wtvj6awg86" path="res://battle/buttons/item.gd" id="8_kpn0w"]
+[ext_resource type="Script" uid="uid://d0q5fbuifyfwk" path="res://battle/buttons/mercy.gd" id="9_2lrfi"]
+[ext_resource type="Script" uid="uid://by4iry1fn6arw" path="res://battle/battle_writer.gd" id="10_2k4h2"]
+
+[node name="battle_template" type="Node2D"]
+script = ExtResource("1_aa2me")
+
+[node name="cam" type="Camera2D" parent="."]
+position = Vector2(320, 240)
+
+[node name="player_sm" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("2_4xpe1")]
+initial_state = NodePath("in_buttons")
+
+[node name="dodging" parent="player_sm" index="0" node_paths=PackedStringArray("heart")]
+heart = NodePath("../../heart")
+
+[node name="in_buttons" parent="player_sm" index="1" node_paths=PackedStringArray("heart", "box", "buttons", "writer")]
+script = ExtResource("3_agrq4")
+heart = NodePath("../../heart")
+box = NodePath("../../box")
+buttons = [NodePath("../../buttons_handler/fight"), NodePath("../../buttons_handler/act"), NodePath("../../buttons_handler/item"), NodePath("../../buttons_handler/mercy")]
+writer = NodePath("../../writer")
+
+[node name="hud" parent="." instance=ExtResource("5_3asw0")]
+
+[node name="buttons_handler" parent="." instance=ExtResource("4_ajehn")]
+
+[node name="fight" parent="buttons_handler" index="0"]
+script = ExtResource("6_2k4h2")
+
+[node name="act" parent="buttons_handler" index="1"]
+script = ExtResource("7_btl4p")
+
+[node name="item" parent="buttons_handler" index="2"]
+script = ExtResource("8_kpn0w")
+
+[node name="mercy" parent="buttons_handler" index="3"]
+script = ExtResource("9_2lrfi")
+
+[node name="writer" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_2k4h2")
+
+[node name="box" parent="." instance=ExtResource("6_ct7nr")]
+
+[node name="heart" parent="." instance=ExtResource("3_4xpe1")]
+z_index = 1
+position = Vector2(320, 320)
+
+[editable path="player_sm"]
+[editable path="buttons_handler"]
